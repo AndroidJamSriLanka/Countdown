@@ -76,7 +76,5 @@ public class Main3Activity extends ActionBarActivity implements AsyncResponse{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 }

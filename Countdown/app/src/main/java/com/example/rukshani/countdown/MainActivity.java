@@ -4,8 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -15,18 +20,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        new CountDownTimer(2000, 1000) {
-            public void onFinish() {
-                Intent startActivity = new Intent(MainActivity.this,Main2Activity.class);
-                startActivity(startActivity);
-                finish();
-            }
-
-            public void onTick(long millisUntilFinished) {
-            }
-
-        }.start();
 
     }
 
@@ -51,5 +44,27 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public void markerClick(View view){
+        Log.d("Marker","Marker button was clicked");
+
+    }
+
+    public void timedisClick(View view){
+        Log.d("Timedis","timedis button was clicked");
+
+    }
+
+
+    public void alarmClick(View view){
+
+        Intent intent=new Intent(MainActivity.this,Main2Activity.class);
+        startActivity(intent);
+
+        Log.d("Notification", "notification button was clicked");
+
     }
 }

@@ -11,8 +11,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -28,10 +30,10 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        latitudeField = (TextView) findViewById(R.id.textView1);
-        longitudeField = (TextView) findViewById(R.id.textView2);
-        cityField= (TextView) findViewById(R.id.textView3);
-        countryField= (TextView) findViewById(R.id.textView5);
+        latitudeField = (TextView) findViewById(R.id.latitude);
+        longitudeField = (TextView) findViewById(R.id.longitude);
+        cityField= (TextView) findViewById(R.id.city);
+        countryField= (TextView) findViewById(R.id.country);
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -68,8 +70,8 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
                 String cityName = addresses.get(0).getSubAdminArea();
                 String countryName = addresses.get(0).getCountryName();
 
-                cityField.setText(cityName);
-                countryField.setText(countryName);
+                cityField.setText("City :"+cityName);
+                countryField.setText("Country :"+countryName);
 
             }
         }catch(IOException e){
@@ -96,6 +98,8 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
     public void searchTime(View view){
         Intent intent2=new Intent(this,Main3Activity.class);
         startActivity(intent2);
+
+        Log.d("Search", "search button was clicked");
 
     }
 
