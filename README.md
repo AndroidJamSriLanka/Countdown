@@ -7,9 +7,9 @@ https://developers.google.com/maps/documentation/directions/
 
 ## Work done
 	
-	UI design<br/>
-	Created activities with few settings<br/>
-	Parsing json data(Distance,Duration)<br/>	
+	UI design 
+	Created activities with few settings 
+	Parsing json data(Distance,Duration) 	
 
 ## Screenshots
 
