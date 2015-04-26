@@ -1,7 +1,21 @@
 # Countdown 
 A simple android app that notify the user about the current location. When you are traveling the application can be used as an alerting device that reminds about the set destination before reaching.
 
-# Data Sources
-https://developers.google.com/places/android/current-place
-
+## Data Sources
+https://developers.google.com/places/android/current-place<br/>
 https://developers.google.com/maps/documentation/directions/
+
+## Work done
+	
+	UI design<br/>
+	Created activities with few settings<br/>
+	Parsing json data(Distance,Duration)<br/>	
+
+## Screenshots
+
+![Home](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/home.JPG "Home page")<br/>
+![Second](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/second.png "Second page")<br/>
+![Destination](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/destination.png "Destination details")
+
+
+
