@@ -15,7 +15,7 @@ https://developers.google.com/maps/documentation/directions/
 
 ![Home](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/home.png "Home page")<br/>
 ![Second](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/second.png "Second page")<br/>
-![Destination](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/third.png "Destination details")
+![Destination](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/third.png "Destination details")<br/>
 ![Notification](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/fourth.png "Notification")
 
 
