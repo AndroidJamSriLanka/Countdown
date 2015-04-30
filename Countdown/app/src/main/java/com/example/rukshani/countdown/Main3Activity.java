@@ -1,12 +1,25 @@
 package com.example.rukshani.countdown;
 
 import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,17 +28,47 @@ import org.json.JSONObject;
 
 public class Main3Activity extends ActionBarActivity implements AsyncResponse{
 
+    final static private long ONE_SECOND = 1000;
+    final static private long FIVE_MINUTES=5*60*ONE_SECOND;
+
+    PendingIntent pi;
+    BroadcastReceiver br;
+    AlarmManager am;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        setup();
 
         WebService webService = new WebService(Main3Activity.this, "get", "Loading");
         webService.asyncResponse = this;
-        webService.execute("https://maps.googleapis.com/maps/api/directions/json?origin=Kurunegala&destination=Colombo&avoid=highways&mode=car");
+
+        Bundle b=this.getIntent().getExtras();
+        String city=b.getString("city");
+        String des=b.getString("des");
+        System.out.println("Current city: "+city);
+        System.out.println("Destination city: "+des);
+
+        webService.execute("https://maps.googleapis.com/maps/api/directions/json?origin="+city+"&destination="+des+"&avoid=highways&mode=car");
+
+        Button button= (Button) findViewById(R.id.notificationButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Reminder", "Reminder button was clicked");
+
+                SharedPreferences sharedPreferences = getSharedPreferences("Countdown", MODE_PRIVATE);
+                Long milliDurationValue=sharedPreferences.getLong("milliDurationValue",0);
+                System.out.println("milliDurationValue:" +milliDurationValue);
+                Long reminderTime=milliDurationValue-FIVE_MINUTES;
+                System.out.println("Reminder time: "+reminderTime);
+                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + reminderTime, pi);
+                Toast.makeText(getApplicationContext(),"Notification is set",Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,8 +116,50 @@ public class Main3Activity extends ActionBarActivity implements AsyncResponse{
             String duration = durationObject.getString("text");
             textView1.setText(duration);
 
+            String durationSeconds = durationObject.getString("value");
+            System.out.println("durationSeconds:"+durationSeconds);
+
+            Long durationValue=Long.parseLong(durationSeconds);
+            Long milliDurationValue=durationValue*ONE_SECOND;
+            System.out.println("durationInMilliseconds:"+milliDurationValue);
+
+            SharedPreferences sharedPreferences = getSharedPreferences("Countdown", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putLong("milliDurationValue", milliDurationValue);
+            editor.apply();
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+
+    private void setup() {
+        br = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context c, Intent i) {
+
+                NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                android.app.Notification notify=new android.app.Notification(R.drawable.two,"",System.currentTimeMillis());
+                Context context=Main3Activity.this;
+                CharSequence title="Closer to destination";
+                CharSequence details="Continue with your work";
+                Intent intent=new Intent(context,Notification.class);
+                PendingIntent pending=PendingIntent.getActivity(context, 0, intent, 0);
+                notify.setLatestEventInfo(context,title, details, pending);
+                nm.notify(0, notify);
+            }
+
+        };
+
+        registerReceiver(br, new IntentFilter("") );
+        pi = PendingIntent.getBroadcast( this, 0, new Intent(""),0 );
+        am = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+    }
+
+    protected void onDestroy() {
+        am.cancel(pi);
+        unregisterReceiver(br);
+        super.onDestroy();
     }
 }

@@ -13,9 +13,11 @@ https://developers.google.com/maps/documentation/directions/
 
 ## Screenshots
 
-![Home](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/home.JPG "Home page")<br/>
+![Home](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/home.png "Home page")<br/>
 ![Second](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/second.png "Second page")<br/>
-![Destination](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/destination.png "Destination details")
+![Destination](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/third.png "Destination details")
+![Notification](https://github.com/AndroidJamSriLanka/Countdown/blob/master/UI_design/fourth.png "Notification")
+
 
 
 

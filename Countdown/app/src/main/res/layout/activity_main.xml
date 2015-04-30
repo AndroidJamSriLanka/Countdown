@@ -34,17 +34,18 @@
                 android:layout_gravity="center_horizontal"
                 android:onClick="markerClick"
                 android:clickable="true"
-                android:contentDescription="marker" />
+                android:contentDescription="@string/marker" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/currentLocation"
+                android:text="@string/LocationDetails"
                 android:id="@+id/current"
                 android:layout_gravity="center_horizontal"
                 android:textStyle="bold"
                 android:textColor="#ffffffff" />
         </LinearLayout>
+
 
         <LinearLayout
             android:orientation="vertical"
@@ -54,33 +55,6 @@
 
             <ImageButton
                 android:src="@drawable/timedis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/timedisButton"
-                android:background="@null"
-                android:layout_gravity="center_horizontal"
-                android:onClick="timedisClick"
-                android:clickable="true"
-                android:contentDescription="timedis" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/destination"
-                android:id="@+id/destination"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textColor="#ffffffff" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:src="@drawable/alarm"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:id="@+id/alarmButton"
@@ -88,7 +62,7 @@
                 android:layout_gravity="center_horizontal"
                 android:onClick="alarmClick"
                 android:clickable="true"
-                android:contentDescription="alarm" />
+                android:contentDescription="@string/alarmButton" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -20,11 +21,15 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class Main2Activity extends ActionBarActivity implements LocationListener {
-    private TextView latitudeField;
-    private TextView longitudeField;
-    private TextView cityField;
-    private TextView countryField;
+public class Main2Activity extends ActionBarActivity implements LocationListener{
+    public TextView latitudeField;
+    public TextView longitudeField;
+    public TextView cityField;
+    public TextView countryField;
+
+    EditText destination;
+    //RadioButton car;
+    //RadioButton bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +40,12 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
         cityField= (TextView) findViewById(R.id.city);
         countryField= (TextView) findViewById(R.id.country);
 
+        destination= (EditText) findViewById(R.id.editTextDestination);
+        //car= (RadioButton) findViewById(R.id.radioButtonCar);
+        //bus= (RadioButton) findViewById(R.id.radioButtonBus);
+
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
 
         if (!enabled) {
             Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -57,9 +65,8 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
     public void onLocationChanged(Location location) {
         Double lat = location.getLatitude();
         Double lng = location.getLongitude();
-        latitudeField.setText("Latitude:" + lat);
+        latitudeField.setText("Latitude :" + lat);
         longitudeField.setText("Longitude:" + lng);
-
 
         List<Address> addresses;
         Geocoder geocoder=new Geocoder(getBaseContext(),Locale.getDefault());
@@ -70,8 +77,8 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
                 String cityName = addresses.get(0).getSubAdminArea();
                 String countryName = addresses.get(0).getCountryName();
 
-                cityField.setText("City :"+cityName);
-                countryField.setText("Country :"+countryName);
+                cityField.setText(cityName);
+                countryField.setText(countryName);
 
             }
         }catch(IOException e){
@@ -79,6 +86,7 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
         }
 
     }
+
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -96,11 +104,14 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
     }
 
     public void searchTime(View view){
-        Intent intent2=new Intent(this,Main3Activity.class);
-        startActivity(intent2);
 
-        Log.d("Search", "search button was clicked");
+        Intent intent=new Intent(this,Main3Activity.class);
+        final String des=destination.getText().toString();
+        intent.putExtra("city", ((TextView) findViewById(R.id.city)).getText().toString());
+        intent.putExtra("des", des);
+        startActivity(intent);
+
+        Log.d("Search", "Search button was clicked");
 
     }
-
 }

@@ -2,15 +2,11 @@ package com.example.rukshani.countdown;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -53,18 +49,12 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
-    public void timedisClick(View view){
-        Log.d("Timedis","timedis button was clicked");
-
-    }
-
-
     public void alarmClick(View view){
 
         Intent intent=new Intent(MainActivity.this,Main2Activity.class);
         startActivity(intent);
 
-        Log.d("Notification", "notification button was clicked");
+        Log.d("Notification", "Notification button was clicked");
 
     }
 }
