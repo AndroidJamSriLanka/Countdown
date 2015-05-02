@@ -19,6 +19,7 @@
         android:layout_alignParentTop="true">
 
 
+<!--
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -45,33 +46,38 @@
                 android:textStyle="bold"
                 android:textColor="#ffffffff" />
         </LinearLayout>
-
+-->
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal">
 
-            <ImageButton
-                android:src="@drawable/timedis"
-                android:layout_width="128dp"
-                android:layout_height="128dp"
-                android:id="@+id/alarmButton"
-                android:background="@null"
-                android:layout_gravity="center_horizontal"
-                android:onClick="alarmClick"
-                android:clickable="true"
-                android:contentDescription="@string/alarmButton" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Notifications"
-                android:id="@+id/notification"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#ffffffff"
-                android:textStyle="bold" />
         </LinearLayout>
+
+        <ImageButton
+            android:src="@drawable/timedis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmButton"
+            android:background="@null"
+            android:layout_gravity="center_horizontal"
+            android:onClick="alarmClick"
+            android:clickable="true"
+            android:contentDescription="@string/alarmButton"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Notifications"
+            android:id="@+id/notification"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ffffffff"
+            android:textStyle="bold"
+            android:layout_weight="1" />
+
     </LinearLayout>
 </RelativeLayout>

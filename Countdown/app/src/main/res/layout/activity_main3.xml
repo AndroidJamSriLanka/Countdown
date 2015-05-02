@@ -102,8 +102,7 @@
         android:layout_height="wrap_content"
         android:text="@string/Reminder"
         android:id="@+id/notificationButton"
-        android:layout_marginTop="106dp"
-        android:layout_below="@+id/linearLayout3"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

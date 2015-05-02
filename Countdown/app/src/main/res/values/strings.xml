@@ -20,15 +20,16 @@
     <string name="Country">Country</string>
     <string name="Notifications">Notification</string>
     <string name="Reminder">Reminder</string>
-    <string name="title_activity_second">Second</string>
+    <string name="title_activity_second">Notification</string>
     <string name="Location">Current Location</string>
     <string name="Destination">Destination</string>
-    <string name="Car">Car</string>
+    <string name="Driving">Driving</string>
     <string name="Bus">Bus</string>
     <string name="search">Search</string>
     <string name="marker">marker</string>
     <string name="timedis">timedis</string>
     <string name="alarmButton">alarm</string>
-    <string name="DestinationReminder">You will reach the destination within five minutes</string>
+    <string name="DestinationReminder">You will reach the destination within few minutes</string>
+    <string name="Walking">Walking</string>
 
 </resources>

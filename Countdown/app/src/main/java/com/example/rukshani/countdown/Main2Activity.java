@@ -14,6 +14,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -28,8 +30,8 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
     public TextView countryField;
 
     EditText destination;
-    //RadioButton car;
-    //RadioButton bus;
+    RadioButton Driving;
+    RadioButton Walking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +43,8 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
         countryField= (TextView) findViewById(R.id.country);
 
         destination= (EditText) findViewById(R.id.editTextDestination);
-        //car= (RadioButton) findViewById(R.id.radioButtonCar);
-        //bus= (RadioButton) findViewById(R.id.radioButtonBus);
+        Driving= (RadioButton) findViewById(R.id.radioButtonDriving);
+        Walking= (RadioButton) findViewById(R.id.radioButtonWalking);
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -52,9 +54,10 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
             startActivity(intent);
         }
 
+        //criteria for selecting a location provider
         Criteria criteria = new Criteria();
-        String provider = locationManager.getBestProvider(criteria, false);
-        Location location = locationManager.getLastKnownLocation(provider);
+        String provider = locationManager.getBestProvider(criteria, false);//Returns the name of the provider that best meets the given criteria
+        Location location = locationManager.getLastKnownLocation(provider);//Returns a Location indicating the data from the last known location fix obtained from the given provider
 
         if (location != null) {
             onLocationChanged(location);
@@ -69,7 +72,7 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
         longitudeField.setText("Longitude:" + lng);
 
         List<Address> addresses;
-        Geocoder geocoder=new Geocoder(getBaseContext(),Locale.getDefault());
+        Geocoder geocoder=new Geocoder(getBaseContext(),Locale.getDefault());//to handle geo coding and reverse geo coding
         try{
             addresses=geocoder.getFromLocation(lat,lng,5);
             if(addresses.size()>0)
@@ -103,12 +106,31 @@ public class Main2Activity extends ActionBarActivity implements LocationListener
 
     }
 
+
     public void searchTime(View view){
 
         Intent intent=new Intent(this,Main3Activity.class);
         final String des=destination.getText().toString();
+        final String drive=Driving.getText().toString();
+        final String walk=Walking.getText().toString();
+
+        String mode;
+
+        if(Driving.isChecked())
+        {
+            System.out.println("driving....."+drive);
+            mode=drive;
+        }
+        else
+        {
+            System.out.println("walking..."+walk);
+            mode=walk;
+        }
+
+        System.out.println("mode........"+mode);
         intent.putExtra("city", ((TextView) findViewById(R.id.city)).getText().toString());
         intent.putExtra("des", des);
+        intent.putExtra("mode",mode);
         startActivity(intent);
 
         Log.d("Search", "Search button was clicked");

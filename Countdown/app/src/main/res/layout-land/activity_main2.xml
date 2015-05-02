@@ -136,19 +136,20 @@
                     <RadioButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Car"
-                        android:id="@+id/radioButtonCar" />
+                        android:text="@string/Driving"
+                        android:id="@+id/radioButtonDriving" />
 
                 </RadioGroup>
 
                 <RadioButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/Bus"
-                    android:id="@+id/radioButtonBus"
+                    android:text="Walking"
+                    android:id="@+id/radioButtonWalking"
                     android:layout_gravity="right"
                     android:layout_column="26"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:checked="false" />
             </TableRow>
         </TableLayout>
 

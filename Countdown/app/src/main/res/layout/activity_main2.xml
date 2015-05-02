@@ -19,6 +19,7 @@
         android:background="#cc666666"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -136,21 +137,25 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="0dp">
+                android:layout_marginTop="0dp"
+                android:id="@+id/mode">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Car"
-                    android:id="@+id/radioButtonCar" />
+                    android:text="@string/Driving"
+                    android:id="@+id/radioButtonDriving"
+                    android:checked="false" />
+
 
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Bus"
-                    android:id="@+id/radioButtonBus"
+                    android:text="walking"
+                    android:id="@+id/radioButtonWalking"
                     android:layout_gravity="right"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:checked="false" />
 
             </RadioGroup>
         </LinearLayout>

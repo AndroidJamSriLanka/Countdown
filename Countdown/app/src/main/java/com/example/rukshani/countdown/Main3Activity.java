@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -29,10 +30,10 @@ import org.json.JSONObject;
 public class Main3Activity extends ActionBarActivity implements AsyncResponse{
 
     final static private long ONE_SECOND = 1000;
-    final static private long FIVE_MINUTES=5*60*ONE_SECOND;
+    final static private long FIVE_MINUTES=6*60*ONE_SECOND;
 
-    PendingIntent pi;
-    BroadcastReceiver br;
+    PendingIntent pi;//A description of an Intent and target action to perform with it
+    BroadcastReceiver br;//Base class for code that will receive intents sent by sendBroadcast()
     AlarmManager am;
 
     @Override
@@ -47,10 +48,15 @@ public class Main3Activity extends ActionBarActivity implements AsyncResponse{
         Bundle b=this.getIntent().getExtras();
         String city=b.getString("city");
         String des=b.getString("des");
+        String mode=b.getString("mode");
+
         System.out.println("Current city: "+city);
         System.out.println("Destination city: "+des);
+        System.out.println("mode of travelling: "+mode);
 
-        webService.execute("https://maps.googleapis.com/maps/api/directions/json?origin="+city+"&destination="+des+"&avoid=highways&mode=car");
+        //https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=bicycling&key=API_KEY
+
+        webService.execute("https://maps.googleapis.com/maps/api/directions/json?origin="+city+"&destination="+des+"&avoid=highways&mode="+mode+"");
 
         Button button= (Button) findViewById(R.id.notificationButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +69,7 @@ public class Main3Activity extends ActionBarActivity implements AsyncResponse{
                 System.out.println("milliDurationValue:" +milliDurationValue);
                 Long reminderTime=milliDurationValue-FIVE_MINUTES;
                 System.out.println("Reminder time: "+reminderTime);
-                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + reminderTime, pi);
+                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + reminderTime, pi);//Returns milliseconds since boot, including time spent in sleep.
                 Toast.makeText(getApplicationContext(),"Notification is set",Toast.LENGTH_SHORT).show();
             }
         });
@@ -141,13 +147,16 @@ public class Main3Activity extends ActionBarActivity implements AsyncResponse{
 
                 NotificationManager nm=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 android.app.Notification notify=new android.app.Notification(R.drawable.two,"",System.currentTimeMillis());
-                Context context=Main3Activity.this;
+                Context context=Main3Activity.this;//the context that pi should start is Main3Activity
                 CharSequence title="Closer to destination";
-                CharSequence details="Continue with your work";
-                Intent intent=new Intent(context,Notification.class);
-                PendingIntent pending=PendingIntent.getActivity(context, 0, intent, 0);
+                CharSequence details="Continue with your work";//the context in expanded entry
+                Intent intent=new Intent(context,Notification.class);//from Main3 to Notification
+                //A description of an Intent and target action to perform with it
+                //granting other app to perform the operation specified
+                PendingIntent pending=PendingIntent.getActivity(context, 0, intent, 0);//context,request code for user,array of intent activities to do,flags
                 notify.setLatestEventInfo(context,title, details, pending);
-                nm.notify(0, notify);
+                notify.sound= Uri.parse(""+R.raw.sound);
+                nm.notify(0, notify);//to post a notification to be shown in the status bar
             }
 
         };

@@ -22,6 +22,8 @@
         android:background="#7b5f6767"
         android:baselineAligned="false">
 
+
+        <!--
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="272dp"
@@ -50,6 +52,8 @@
                 android:textColor="#ffffffff" />
 
         </LinearLayout>
+
+        -->
 
 
         <LinearLayout
